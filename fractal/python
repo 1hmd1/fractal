@@ -1,0 +1,24 @@
+
+#код на питоне для фрактала
+def mandelbrot(width, height, center_x, center_y, scale, max_iter):
+
+    data = [[0] * width for _ in range(height)]
+
+    for py in range(height):
+        y0 = center_y + (py - height / 2.0) * scale
+        for px in range(width):
+            x0 = center_x + (px - width / 2.0) * scale
+
+            x = 0.0
+            y = 0.0
+            it = 0
+
+            while x * x + y * y <= 4.0 and it < max_iter:
+                x_new = x * x - y * y + x0
+                y = 2.0 * x * y + y0
+                x = x_new
+                it += 1
+
+            data[py][px] = it
+
+    return data
